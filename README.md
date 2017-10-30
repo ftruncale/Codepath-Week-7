@@ -14,9 +14,9 @@ Time spent: **X** hours spent in total
   - [ ] GIF Walkthrough: ![Dunno why this didn't load](/images/youtubeXSS.gif 'instructions')
   - [ ] Steps to recreate:
     - On a post or page, embed a YouTube url with the format of:
-      [code][embed src='https://youtube.com/embed/whateverPAYLOAD'][/embed][/code]
+      `[embed src='https://youtube.com/embed/whateverPAYLOAD'][/embed]`
     - Requires usage of escape characters to avoid filtering.
-    - Ex: [code][embed src='https://youtube.com/embed/whatever\x3csvg onload=alert(1)\x3e'][/embed][/code]
+    - Ex: `[embed src='https://youtube.com/embed/whatever\x3csvg onload=alert(1)\x3e'][/embed]`
     - View the page with the payload
   - [ ] Affected source code:
     - [embed.php](https://github.com/WordPress/WordPress/commit/419c8d97ce8df7d5004ee0b566bc5e095f0a6ca8)
@@ -27,8 +27,8 @@ Time spent: **X** hours spent in total
     - Fixed in version: 4.2.15
   - [ ] GIF Walkthrough: ![Dunno why this didn't load](/images/largefileXSS.gif 'instructions')
   - [ ] Steps to recreate:
-    - Go to the wp-admin add media page [code]../wp-admin/media-new.php[/code]
-    - Upload a 20MB or larger file with the filename as the payload (Example [code]thanks nasa<img src=x onerror=alert(1)>.png[/code])
+    - Go to the wp-admin add media page `../wp-admin/media-new.php`
+    - Upload a 20MB or larger file with the filename as the payload (Example `thanks nasa<img src=x onerror=alert(1)>.png`)
   - [ ] Affected source code:
     - [handlers.js](https://github.com/WordPress/WordPress/commit/8c7ea71edbbffca5d9766b7bea7c7f3722ffafa6))
 3. Nav Menu Title Cross-Site Scripting (XSS) (CVE-2015-5733)
@@ -50,7 +50,7 @@ Time spent: **X** hours spent in total
     - Fixed in version: 4.2.13
   - [ ] GIF Walkthrough: ![Dunno why this didn't load](/images/mediametadata.gif 'instructions')
   - [ ] Steps to recreate:
-    - Add an mp3 with the title metadata set to [code]<noscript><script>alert(1);</script>[/code]
+    - Add an mp3 with the title metadata set to `<noscript><script>alert(1);</script>`
     - Insert a playlist containing the mp3 into a post
     - View the page
   - [ ] Affected source code:
