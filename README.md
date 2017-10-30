@@ -6,7 +6,7 @@ Time spent: **X** hours spent in total
 
 ## Pentesting Report
 
-1. Authenticated Stored Cross-Site Scripting (XSS) in YouTube URL Embeds
+1. Authenticated Stored Cross-Site Scripting (XSS) in YouTube URL Embeds (CVE-2017-6817)
   - [ ] Summary:
     - Vulnerability types: XSS
     - Tested in version: 4.2
@@ -14,48 +14,47 @@ Time spent: **X** hours spent in total
   - [ ] GIF Walkthrough: ![Dunno why this didn't load](/images/youtubeXSS.gif 'instructions')
   - [ ] Steps to recreate:
     - On a post or page, embed a YouTube url with the format of:
-      [embed src='https://youtube.com/embed/whateverPAYLOAD'][/embed]
+      [code][embed src='https://youtube.com/embed/whateverPAYLOAD'][/embed][/code]
     - Requires usage of escape characters to avoid filtering.
-    - Ex: [embed src='https://youtube.com/embed/whatever\x3csvg onload=alert(1)\x3e'][/embed]
-  This also requires the usage of
+    - Ex: [code][embed src='https://youtube.com/embed/whatever\x3csvg onload=alert(1)\x3e'][/embed][/code]
+    - View the page with the payload
   - [ ] Affected source code:
     - [embed.php](https://github.com/WordPress/WordPress/commit/419c8d97ce8df7d5004ee0b566bc5e095f0a6ca8)
-1. (Required) Vulnerability Name or ID
+2. Large File Upload Error XSS (CVE-2017-9061)
   - [ ] Summary:
-    - Vulnerability types:
-    - Tested in version:
-    - Fixed in version:
-  - [ ] GIF Walkthrough:
+    - Vulnerability types: XSS
+    - Tested in version: 4.2
+    - Fixed in version: 4.2.15
+  - [ ] GIF Walkthrough: ![Dunno why this didn't load](/images/largefileXSS.gif 'instructions')
   - [ ] Steps to recreate:
+    - Go to the wp-admin add media page [code]../wp-admin/media-new.php[/code]
+    - Upload a 20MB or larger file with the filename as the payload (Example [code]thanks nasa<img src=x onerror=alert(1)>.png[/code])
   - [ ] Affected source code:
-    - [Link 1](https://core.trac.wordpress.org/browser/tags/version/src/source_file.php)
-1. (Required) Vulnerability Name or ID
+    - [handlers.js](https://github.com/WordPress/WordPress/commit/8c7ea71edbbffca5d9766b7bea7c7f3722ffafa6))
+3. Nav Menu Title Cross-Site Scripting (XSS) (CVE-2015-5733)
   - [ ] Summary:
-    - Vulnerability types:
-    - Tested in version:
-    - Fixed in version:
-  - [ ] GIF Walkthrough:
+    - Vulnerability types: XSS
+    - Tested in version: 4.2
+    - Fixed in version: 4.2.4
+  - [ ] GIF Walkthrough: ![Dunno why this didn't load](/images/widgettitleXSS.gif 'instructions')
   - [ ] Steps to recreate:
+    - Navigate to the widget page in wp-admin
+    - Create a new text widget, with any title. Second entry-box is for payload.
+    - Navigate to any page on the host, widget loads automatically and payload runs.
   - [ ] Affected source code:
-    - [Link 1](https://core.trac.wordpress.org/browser/tags/version/src/source_file.php)
-1. (Optional) Vulnerability Name or ID
+    - [default-widgets.php](https://core.trac.wordpress.org/changeset/33529)
+4.  Authenticated Cross-Site Scripting (XSS) via Media File Metadata (CVE-2017-6814)
   - [ ] Summary:
-    - Vulnerability types:
-    - Tested in version:
-    - Fixed in version:
-  - [ ] GIF Walkthrough:
+    - Vulnerability types: XSS
+    - Tested in version: 4.2
+    - Fixed in version: 4.2.13
+  - [ ] GIF Walkthrough: ![Dunno why this didn't load](/images/mediametadata.gif 'instructions')
   - [ ] Steps to recreate:
+    - Add an mp3 with the title metadata set to [code]<noscript><script>alert(1);</script>[/code]
+    - Insert a playlist containing the mp3 into a post
+    - View the page
   - [ ] Affected source code:
-    - [Link 1](https://core.trac.wordpress.org/browser/tags/version/src/source_file.php)
-1. (Optional) Vulnerability Name or ID
-  - [ ] Summary:
-    - Vulnerability types:
-    - Tested in version:
-    - Fixed in version:
-  - [ ] GIF Walkthrough:
-  - [ ] Steps to recreate:
-  - [ ] Affected source code:
-    - [Link 1](https://core.trac.wordpress.org/browser/tags/version/src/source_file.php)
+    - [media.php](https://github.com/WordPress/WordPress/commit/28f838ca3ee205b6f39cd2bf23eb4e5f52796bd7)
 
 ## Assets
 
@@ -74,7 +73,7 @@ Describe any challenges encountered while doing the work
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2017] [Francesca]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
